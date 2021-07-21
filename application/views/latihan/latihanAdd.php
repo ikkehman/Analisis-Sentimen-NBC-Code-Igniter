@@ -25,10 +25,13 @@
               <label>Komentar</label>
               <input required="required" type="text" class="form-control" name="komentar" value="" >
             </div>
-            <div class="form-group">
-              <label>Sentimen</label>
-              <input required="required" type="text" class="form-control" name="sentimen" value="" >
-            </div>
+            <div class="form-group col-md-3">
+            <label>Sentimen</label>
+            <select class="form-control form-control" id="defaultSelect" name="sentimen">
+											<option value="1">Positif</option>
+											<option value="0">Negatif</option>
+                    </select>
+          </div>
           </div>  
         </div>
 
