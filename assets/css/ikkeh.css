@@ -1,0 +1,203 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+.brand-logo img {
+  max-width: 140px;
+  margin-top: 15px
+}
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+	font-size: inherit;
+}
+
+header, main, footer {
+  padding-left: 300px;
+}
+
+main {
+  padding-top: 20px;
+}
+
+@media only screen and (max-width : 992px) {
+  header, main, footer {
+    padding-left: 0;
+  }
+}
+
+@media only screen and (min-width: 993px) {
+  .container {
+      width: 95%;
+      padding: 30px 15px;
+      min-height: calc(100% - 123px);
+      margin-top: 55px;
+  }
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  background-color: #eeeeeed1;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.dashboard-row {
+  margin-bottom: 0px;
+}
+
+.dashboard-title {
+  margin-top: 5px;
+  margin-left: 40px;
+}
+
+/* Start */
+.side-nav.fixed{
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+  background-image: url(http://localhost/taro/assets/img/sidebar-1.jpg);
+}
+
+.card{
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+}
+
+.header.card{
+    background: linear-gradient(60deg, #53beef, #26aae6);
+    box-shadow: 0 12px 20px -10px rgba(156, 39, 176, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(156, 39, 176, 0.2);
+    border-radius: 3px;
+    padding: 20px;
+    color: white;
+    margin: 0 15px 0;
+}
+
+.subheader {
+    cursor: initial;
+    pointer-events: none;
+    font-size: 17px;
+    font-weight: bold;
+    line-height: 48px;
+    padding-left: 10px;
+}
+
+.card .card-title{
+  font-size: 28px !important;
+}
+
+.material-tooltip{
+  display: none;
+}
+
+@media (max-width: 768px){
+.container {
+    padding-top: 50px;
+}
+}
+
+.row{
+  margin-right: 0px;
+    margin-left: 0px;
+}
+
+hr.style1{
+  border-top: 2px solid rgba(0,0,0,.1);;
+}
+
+.kv-avatar .krajee-default.file-preview-frame,.kv-avatar .krajee-default.file-preview-frame:hover {
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    text-align: center;
+}
+.kv-avatar {
+    display: inline-block;
+}
+.kv-avatar .file-input {
+    display: table-cell;
+    width: 213px;
+}
+.kv-reqd {
+    color: red;
+    font-family: monospace;
+    font-weight: normal;
+}
+
+.file-actions {
+  display: none;
+}
+
+.card-panel{
+  padding-top: 15px;
+}
+
+.alert-success {
+    color: #155724!important;
+    background-color: #d4edda!important;
+    border-color: #c3e6cb!important;
+}
+
+.alert-warning {
+    color: #8a6d3b!important;
+    background-color: #fcf8e3!important;
+    border-color: #faebcc!important;
+}
+
+.ikkehred{
+  background-color: #dc354552;
+}
+
+.files input {
+  outline: 2px dashed #92b0b3;
+  outline-offset: -10px;
+  -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+  transition: outline-offset .15s ease-in-out, background-color .15s linear;
+  padding: 120px 0px 85px 35%;
+  text-align: center !important;
+  margin: 0;
+  width: 100% !important;
+}
+.files input:focus{     outline: 2px dashed #92b0b3;  outline-offset: -10px;
+  -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+  transition: outline-offset .15s ease-in-out, background-color .15s linear; border:1px solid #92b0b3;
+}
+.files{ position:relative}
+.files:after {  pointer-events: none;
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 50px;
+  right: 0;
+  height: 56px;
+  content: "";
+  background-image: url(https://image.flaticon.com/icons/png/128/149/149345.png);
+  display: block;
+  margin: 0 auto;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+.color input{ background-color:#f1f1f1;}
+.files:before {
+  position: absolute;
+  bottom: 10px;
+  left: 0;  pointer-events: none;
+  width: 100%;
+  right: 0;
+  height: 57px;
+  content: " or drag it here. ";
+  display: block;
+  margin: 0 auto;
+  color: #2ea591;
+  font-weight: 600;
+  text-transform: capitalize;
+  text-align: center;
+}
