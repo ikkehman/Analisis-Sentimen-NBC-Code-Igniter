@@ -26,36 +26,62 @@ class Valid extends MY_Controller {
 
   public function index()
   {
+    if ($this->input->post('submit')) {
+
+      $this->form_validation->set_rules('persen', 'Persentase', 'required');
+
+      // Jalankan validasi jika semuanya benar maka lanjutkan
+      if ($this->form_validation->run() === TRUE) {
+        // refresh page
+        redirect('valid/go?persen='.$this->input->post('persen'), 'refresh');
+      } 
+    }
+
+    // Data untuk page index
+    $data['valid'] = $this->db->select('*')
+                          ->from('skripsi_analisa')
+                          ->group_by('tgl')
+                          ->get();
+    $data['pageTitle'] = 'Data Batch';
+    $data['pageContent'] = $this->load->view('valid/validList', $data, TRUE);
+
+    // Jalankan view template/layout
+    $this->load->view('template/layout', $data);
+  }
+
+  public function go()
+  {
     error_reporting (E_ALL ^ E_NOTICE);
-      $analyze = new Analyze();
-      $persent= 100-(intval($_GET['persen']));
-      $uji= $this->db->query("SELECT `komentar` FROM ( SELECT skripsi_komentar.*, @counter := @counter +1 AS counter FROM (select @counter:=0) AS initvar, skripsi_komentar ORDER BY `no` ASC ) AS X where counter <= ($persent/100 * @counter) ORDER BY `no` DESC");
-      $r=0;
-      foreach($uji->result() as $value){
-        $out_text[$r] = $value->komentar;
-        $sentimen[$r] = $analyze->single_process($value->komentar); //hasil analisa tersimpan di sini
-        $stem[$r] = $analyze->input;
+    // Jika form di submit jalankan blok kode ini
+    $analyze = new Analyze();
+    $persent= 100-(intval($_GET['persen']));
+    $uji= $this->db->query("SELECT `komentar` FROM ( SELECT skripsi_komentar.*, @counter := @counter +1 AS counter FROM (select @counter:=0) AS initvar, skripsi_komentar ORDER BY `no` ASC ) AS X where counter <= ($persent/100 * @counter) ORDER BY `no` DESC");
+    $r=0;
+    foreach($uji->result() as $value){
+      $out_text[$r] = $value->komentar;
+      $sentimen[$r] = $analyze->single_process($value->komentar); //hasil analisa tersimpan di sini
+      $stem[$r] = $analyze->input;
 
 //positif
 $s= array_keys($analyze->use['sentimen'], "1");
 $sumArray = array();
 foreach ($s as $kata) {
 foreach ($analyze->bobot as $k=>$subArray) {
-  foreach ($subArray as $id=>$valuex) {
-    if ($id == $kata) {
-                  if ( ! isset($sumArrayn[$k])) {
-   $sumArrayn[$k][$r] = 0;
+foreach ($subArray as $id=>$valuex) {
+  if ($id == $kata) {
+                if ( ! isset($sumArrayn[$k])) {
+ $sumArrayn[$k][$r] = 0;
 }
-      $sumArray[$k][$r]+=$valuex;
-    }
+    $sumArray[$k][$r]+=$valuex;
   }
+}
 }
 }
 
 $xy = count($analyze->use['sentimen']);
 $yzf =count($analyze->use['sentimen'], "1");
 foreach($analyze->tokend as $kata){
-  $tot[$kata] = ($sumArray[$kata][$r] + 1) / ($yzf+$xy);
+$tot[$kata] = ($sumArray[$kata][$r] + 1) / ($yzf+$xy);
 }
 
 $temp = 1;
@@ -68,21 +94,21 @@ $sn= array_keys($analyze->use['sentimen'], "0");
 $sumArrayn = array();
 foreach ($sn as $kata) {
 foreach ($analyze->bobot as $k=>$subArray) {
-  foreach ($subArray as $id=>$valuex) {
-    if ($id == $kata) {
-                  if ( ! isset($sumArrayn[$k])) {
-   $sumArrayn[$k][$r] = 0;
+foreach ($subArray as $id=>$valuex) {
+  if ($id == $kata) {
+                if ( ! isset($sumArrayn[$k])) {
+ $sumArrayn[$k][$r] = 0;
 }
-      $sumArrayn[$k][$r]+=$valuex;
-    }
-    
+    $sumArrayn[$k][$r]+=$valuex;
   }
+  
+}
 }
 }
 $xy = count($analyze->use['sentimen']);
 $yz =count($analyze->use['sentimen'], "0");
 foreach($analyze->tokend as $kata){
-  $totn[$kata] = ($sumArrayn[$kata][$r] + 1) / ($yz+$xy);
+$totn[$kata] = ($sumArrayn[$kata][$r] + 1) / ($yz+$xy);
 }
 
 $tempn = 1;
@@ -92,176 +118,15 @@ $nbcn = $tempn*0.5;
 //end negatif
 
 if ($nbc>$nbcn) {
-  $res = 1;
+$res = 1;
 } else {
-  $res = 0;
+$res = 0;
 }
 
 $lang[$r] = $res;
 
-        $r++;
-      }
-
-    // Data untuk page index
-    $data['valid'] = $this->db->select('*')
-                          ->from('skripsi_analisa')
-                          ->group_by('tgl')
-                          ->get();
-    $data['r'] = $r;
-    $data['stem'] = $stem;
-    $data['lang'] = $lang;
-    $data['test'] = $analyze->use['komentar'];
-    $data['out_text'] = $out_text;
-    $data['pageTitle'] = 'Data Batch';
-    $data['pageContent'] = $this->load->view('valid/validList', $data, TRUE);
-
-    // Jalankan view template/layout
-    $this->load->view('template/layout', $data);
-  }
-
-  public function add()
-  {
-    error_reporting (E_ALL ^ E_NOTICE);
-    // Jika form di submit jalankan blok kode ini
-    $analyze = new Analyze();
-    //if ($this->input->post('submit')) {
-      $this->form_validation->set_rules('file_batch', 'File', 'required');
-
-      $start = microtime(true);
-      $file = $this->input->post('file_batch');
-      $filename = $file['name'];
-      $ext = get_extension($filename);
-
-        $last = $this->db->select('sets')->order_by('sets',"desc")->limit(1)->get('skripsi_analisa');
-        foreach ($last->result() as $row){$naruto=$row->sets;}
-        if(empty($naruto) or $naruto == 0){
-          $sets = 1;
-        }
-        else{
-          $sets = $naruto + 1;
-        }
-        $tgl = date("Y-m-d H:i:s");
-			  $skrg = date("YmdHis");
-        
-        if (!empty($_FILES['file_batch']['name'])) {
-          // Konfigurasi library upload codeigniter
-          $config['upload_path'] = './temp';
-          $config['allowed_types'] = 'xls|xlsx|csv';
-          $config['file_name'] = date("YmdHis");
-          // Load library upload
-          $this->load->library('upload', $config); 
-          $nama = $this->upload->data()['file_name'];
-
-          //$nama = $this->upload->data('file_name'); 
-          // Jika terdapat error pada proses upload maka exit
-          if (!$this->upload->do_upload('file_batch')) {
-              exit($this->upload->display_errors());
-          }
-          $loc = "temp/".$nama.".xlsx";
-          $sp = new SpreadsheetReader($loc);
-          $sheet = $sp->Sheets();
-    
-          $text = array();
-          foreach($sheet as $index=>$name){
-    
-            $sp->ChangeSheet($index);
-            foreach($sp as $key=>$row){
-              if(!isset($row[0])){
-                break;
-              }
-              if(strlen($row[0]) > 0){
-                $text[] = $row[0]; //simpan ke array
-              }
-            }
-          }
-
-          $r=0;
-          foreach($text as $key=>$value){
-            $out_text[$r] = $value;
-            $sentimen[$r] = $analyze->single_process($value); //hasil analisa tersimpan di sini
-            $stem[$r] = $analyze->input;
-    
-    //positif
-    $s= array_keys($analyze->use['sentimen'], "1");
-    $sumArray = array();
-    foreach ($s as $kata) {
-    foreach ($analyze->bobot as $k=>$subArray) {
-      foreach ($subArray as $id=>$valuex) {
-        if ($id == $kata) {
-                      if ( ! isset($sumArrayn[$k])) {
-       $sumArrayn[$k][$r] = 0;
+      $r++;
     }
-          $sumArray[$k][$r]+=$valuex;
-        }
-      }
-    }
-    }
-    
-    $xy = count($analyze->use['sentimen']);
-    $yzf =count($analyze->use['sentimen'], "1");
-    foreach($analyze->tokend as $kata){
-      $tot[$kata] = ($sumArray[$kata][$r] + 1) / ($yzf+$xy);
-    }
-    
-    $temp = 1;
-    $temp *= $tot[$kata];
-    $nbc = $temp*0.5;
-    //end positif
-    
-    //negatif
-    $sn= array_keys($analyze->use['sentimen'], "0");
-    $sumArrayn = array();
-    foreach ($sn as $kata) {
-    foreach ($analyze->bobot as $k=>$subArray) {
-      foreach ($subArray as $id=>$valuex) {
-        if ($id == $kata) {
-                      if ( ! isset($sumArrayn[$k])) {
-       $sumArrayn[$k][$r] = 0;
-    }
-          $sumArrayn[$k][$r]+=$valuex;
-        }
-        
-      }
-    }
-    }
-    $xy = count($analyze->use['sentimen']);
-    $yz =count($analyze->use['sentimen'], "0");
-    foreach($analyze->tokend as $kata){
-      $totn[$kata] = ($sumArrayn[$kata][$r] + 1) / ($yz+$xy);
-    }
-    
-    $tempn = 1;
-    
-    $tempn *= $totn[$kata];
-    $nbcn = $tempn*0.5;
-    //end negatif
-    
-    if ($nbc>$nbcn) {
-      $res = 1;
-    } else {
-      $res = 0;
-    }
-    
-    $lang[$r] = $res;
-    
-    
-            //$jrk[$r] = $analyze->jarak_hasil_ke_pusat();
-    
-            $imploded = implode(",",$stem[$r]);
-            $data = array(
-              'sets' => $sets,
-              'tgl' => $tgl,
-              'komentar' => $out_text[$r],
-              'stem' => $imploded,
-              'sentimen' => $res,
-            );
-            $query = $this->model_valid->insert($data);
-    
-            $r++;
-          }
-echo "dddddddddd";
-          //endgame
-        }
 
       //}
       // Jalankan validasi jika semuanya benar maka lanjutkan
@@ -277,8 +142,9 @@ echo "dddddddddd";
     $data['r'] = $r;
     $data['stem'] = $stem;
     $data['lang'] = $lang;
+    $data['test'] = $analyze->use['komentar'];
     $data['out_text'] = $out_text;
-    $data['pageTitle'] = 'Tambah Data valid';
+    $data['pageTitle'] = 'Data Batch';
     $data['pageContent'] = $this->load->view('valid/validAdd', $data, TRUE);
 
     // Jalankan view template/layout

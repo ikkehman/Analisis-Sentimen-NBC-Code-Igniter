@@ -1,28 +1,18 @@
-
-<div class="card col-12">
-    <div class="card-header">
-                      <div class="card-title"><?php echo $pageTitle; ?></div>
-                    </div>
-      <div class="card-content">
-      <div class="card-body">
-
-        <div class="alert btn-secondary">
-			      Masukkan data set kalimat uji yang ingin dianalisa dalam format Excel untuk diolah secara langsung.
-            <br>
-			      <a href="assets/contoh.xlsx" class="btn btn-primary" target="_blank"><span class="btn-label"><i class="la la-download"></i></span>Download Contoh Format File</a>
-		        </div>
-	      <form action="" method="post" enctype="multipart/form-data">
-              <div class="form-group files color justify-content-center">
-                <input type="file" name="file_batch" class="form-control" accept=".xls, .xlsx, .csv">
-              </div>
-              <div class="d-flex justify-content-center">
-              <button name="btn" class="btn btn-primary pmd-ripple-effect">Process</button>
-              </div>
-        </form>
-
+<?php
+error_reporting (E_ALL ^ E_NOTICE);
+$analyze = new Analyze();
+?>
+    <div class="card col-12">
+      <div class="card-header">
+          <div class="card-title"><?php echo $pageTitle; ?></div>
       </div>
-
-      <?php if($r > 0): ?>
+      <br>  
+<?php var_dump ($test); ?>
+<br>
+<?php if(isset($_GET['persen'])) ?>
+<?php if($r > 0): ?>
+<?php if($r > 0): ?>
+		<?php var_dump ($out_text);?>
       <div class="well">
 				<h2>Upload Set Analysis Result</h2>
 				<table class="data table table-sm pmd-table">
@@ -69,7 +59,38 @@
 					</tbody>
 				</table>
         <?php endif; ?>
-			</div>
-      
-      </div>
-</div>
+        <?php endif; ?>
+<script type="text/javascript">
+    function loadDataset()
+    {
+        var dataset = $("#dataset").val();
+        $.ajax({
+            type:'GET',
+            url:"<?php echo base_url(); ?>multi/pencetan",
+            data:"dataset=" + dataset,
+            success: function(html)
+            { 
+                $("#renderArea").html(html);
+            }
+        }); 
+    }
+</script>
+
+<script type="text/javascript" language="JavaScript">
+   $(document).ready(function(){
+ 
+ $('#modal-konfirmasi').on('show.bs.modal', function (event) {
+  var div = $(event.relatedTarget) // Tombol dimana modal di tampilkan
+ 
+  // Untuk mengambil nilai dari data-id="" yang telah kita tempatkan pada link hapus
+  var id = div.data('code')
+ 
+  var modal = $(this)
+ 
+  // Mengisi atribut href pada tombol ya yang kita berikan id hapus-true pada modal .
+  modal.find('#hapus-true').attr("href","multi/delete/"+id);
+ 
+ })
+ 
+});
+</script>

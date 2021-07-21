@@ -80,49 +80,32 @@ class Latihan extends MY_Controller {
     // Jika form di submit jalankan blok kode ini
     if ($this->input->post('submit')) {
 
-      $this->form_validation->set_rules('nama_latihan', 'Nama', 'required');
-      $this->form_validation->set_rules('no_urutlatihan', 'latihan', 'required');
+      $this->form_validation->set_rules('komentar', 'Komentar', 'required');
+      $this->form_validation->set_rules('sentimen', 'Sentimen', 'required');
 
       // Jalankan validasi jika semuanya benar maka lanjutkan
       if ($this->form_validation->run() === TRUE) {
-
-      if (!empty($_FILES['lambang']['name'])) {
-        // Konfigurasi library upload codeigniter
-        $config['upload_path'] = './assets/images';
-        $config['allowed_types'] = 'jpeg|jpg|png';
-        $config['max_size'] = 2000;
-        $config['file_name'] = $id_latihan.'_'.date('YmdHis');
-
-        // Load library upload
-        $this->load->library('upload', $config);
-        
-        // Jika terdapat error pada proses upload maka exit
-        if (!$this->upload->do_upload('lambang')) {
-            exit($this->upload->display_errors());
-        }
-$data = array('lambang' => $this->upload->data()['file_name'],);
-$query = $this->model_latihan->update($id_latihan, $data);
-        //$data['avatar'] = $this->upload->data()['file_name'];
-      }
-
+        $stem = stem($this->input->post('komentar'));
+        $stems = implode(", ",$stem);
+    
         $data = array(
-          'no_urutlatihan' => $this->input->post('no_urutlatihan'),
-          'nama_latihan' => $this->input->post('nama_latihan'),
-          'akronim' => $this->input->post('akronim'),
-          'tahun' => $this->input->post('tahun'),
+          'komentar' => $this->input->post('komentar'),
+          'sentimen' => $this->input->post('sentimen'),
+          'stem' => $stems,
         );
 
         // Jalankan function insert pada model_events
-        $query = $this->model_latihan->update($id_latihan, $data);
+        $query = $this->model_latihan->update($id_latihan, $data);;
 
         // cek jika query berhasil
-        if ($query) $message = array('status' => true, 'message' => 'Berhasil memperbarui latihan');
-        else $message = array('status' => true, 'message' => 'Gagal memperbarui latihan');
+        if ($query) $message = array('status' => true, 'message' => 'Berhasil mengedit latihan');
+        else $message = array('status' => true, 'message' => 'Gagal mengedit latihan');
 
         // simpan message sebagai session
         $this->session->set_flashdata('message', $message);
 
         // refresh page
+        redirect('latihan/add', 'refresh');
       } 
     }
     
