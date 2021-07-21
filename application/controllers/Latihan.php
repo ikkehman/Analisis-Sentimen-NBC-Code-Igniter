@@ -105,12 +105,12 @@ class Latihan extends MY_Controller {
         $this->session->set_flashdata('message', $message);
 
         // refresh page
-        redirect('latihan/add', 'refresh');
+        redirect('latihan', 'refresh');
       } 
     }
     
     // Ambil data event dari database
-    $latihan = $this->model_latihan->get_where(array('id_latihan' => $id_latihan))->row();
+    $latihan = $this->model_latihan->get_where(array('no' => $id_latihan))->row();
 
     // Mengubah format tanggal dari database
     //$kejuruan->priode = date_format(date_create($kejuruan->priode), 'd-m-Y');

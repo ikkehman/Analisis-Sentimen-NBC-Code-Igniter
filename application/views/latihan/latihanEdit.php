@@ -19,12 +19,21 @@
             </div>
           <?php endif; ?>
 
-        <div class="row mt-3">
+          <div class="row mt-3">
           <div class="col-md-12">
             <div class="form-group">
-              <label>Kata Stopword</label>
-              <input required="required" type="text" class="form-control" name="stopword" value="<?php echo $stopword->stopword; ?>" >
+              <label>Komentar</label>
+              <input required="required" type="text" class="form-control" name="komentar" value="<?php echo $latihan->komentar; ?>" >
             </div>
+            <div class="form-group col-md-3">
+            <label>Sentimen</label>
+            <select class="form-control form-control" id="defaultSelect" name="sentimen">
+                      <option value="<?php echo $latihan->sentimen; ?>"><?php if ($latihan->sentimen == 1) {echo "Positif";} 
+                      else {echo "Negatif";} ; ?></option>
+											<option value="1">Positif</option>
+											<option value="0">Negatif</option>
+                    </select>
+          </div>
           </div>  
         </div>
 
