@@ -206,6 +206,7 @@ echo "dddddddddd";
     // Data untuk page events/add
     $data['r'] = $r;
     $data['stem'] = $stem;
+    $data['test'] = $imploded;
     $data['lang'] = $lang;
     $data['out_text'] = $out_text;
     $data['pageTitle'] = 'Tambah Data multi';

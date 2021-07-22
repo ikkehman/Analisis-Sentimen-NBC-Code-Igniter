@@ -18,8 +18,8 @@
               </div>
             </div>
           <?php endif; ?>
-
         <div class="row mt-3">
+            <a href="<?php echo base_url('latihan/multi'); ?>" class="btn btn-primary btn-border" style="float: right;">+ Batch Upload</a>   
           <div class="col-md-12">
             <div class="form-group">
               <label>Komentar</label>
