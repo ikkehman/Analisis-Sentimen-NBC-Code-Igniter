@@ -22,7 +22,6 @@
 
       </div>
 
-		<?php var_dump ($test);?>
       <div class="well">
 				<h2>Upload Set Analysis Result</h2>
 				<table class="data table table-sm pmd-table">

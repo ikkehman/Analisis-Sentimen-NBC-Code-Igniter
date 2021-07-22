@@ -280,7 +280,7 @@ class Latihan extends MY_Controller {
         $data['btn'] = "<a href='../$url0' class='revise-btn btn btn-danger btn-sm pmd-ripple-effect'>Negatif</a>";
     //		create_alert("Success","Berhasil menghapus tanda kesalahan analisis","../validasi.php?set=$row[sets]");
       } else{
-        $data['cls'] = "ikkehred";
+        $data['cls'] = "ikkehblue";
         $data['btn'] = "<a href='../$url' class='revise-btn btn btn-warning btn-sm pmd-ripple-effect'>Hapus</a>";
       }  
       echo json_encode($data);
