@@ -7,12 +7,10 @@ $analyze = new Analyze();
           <div class="card-title"><?php echo $pageTitle; ?></div>
       </div>
       <br>  
-<?php var_dump ($test); ?>
 <br>
 <?php if(isset($_GET['persen'])) ?>
 <?php if($r > 0): ?>
 <?php if($r > 0): ?>
-		<?php var_dump ($out_text);?>
       <div class="well">
 				<h2>Upload Set Analysis Result</h2>
 				<table class="data table table-sm pmd-table">

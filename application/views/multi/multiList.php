@@ -29,6 +29,13 @@ $analyze = new Analyze();
       <div class="card-header">
           <div class="card-title"><?php echo $pageTitle; ?></div>
       </div>
+      <?php if($message = $this->session->flashdata('message')): ?>
+            <div class="col s12">
+              <div class="alert <?php echo ($message['status']) ? 'alert-success' : 'alert-danger'; ?>">
+                <span class="white-text"><?php echo $message['message']; ?></span>
+              </div>
+            </div>
+          <?php endif; ?>
         <div class="card-body"> 
             <a href="<?php echo base_url('multi/add'); ?>" class="btn btn-primary btn-border" style="float: right;">+ Batch Analysis</a>   
         </div>

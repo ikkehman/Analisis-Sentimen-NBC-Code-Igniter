@@ -68,7 +68,8 @@ $analyze = new Analyze();
           ?>
 	    </ol>
   </div>
-<?php 	echo "<br>";
+  
+<?php /*	echo "<br>";
 	echo "<strong>Word Token : </strong>";
 	echo "<ol>";
 	foreach($analyze->tokend as $tknd){
@@ -143,9 +144,10 @@ $analyze = new Analyze();
 	echo "</tr>";
 
 	echo "</table>";
-
+*/
 	///
 	?>
+
 <!--positif -->
 <?php
 $s= array_keys($analyze->use['sentimen'], "1");
@@ -211,11 +213,6 @@ if ($nbc>$nbcn) {
 }
 ?>
 
-<?php var_dump ($analyze->use['sentimen']); ?>
-<?php echo " <br><br> "; ?>
-<?php var_dump ($analyze->bobot); ?>
-<?php echo " <br><br> "; ?>
-<?php var_dump ($analyze->sql); ?>
 <div class="card-body">
 	<strong><h6>Hasil Final : </h6></strong>
 	<ul>

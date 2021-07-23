@@ -74,7 +74,7 @@
       $this->datatables->select('no,komentar,stem,sentimen');
       $this->datatables->from('skripsi_komentar');
       $this->datatables->add_column('view', '<a href="latihan/edit/$1" class="edit_record btn btn-info" data-code="$1">Edit</a>  <a href="javascript:void(0);" class="delete_record btn btn-danger" data-toggle="modal" data-target="#modal-konfirmasi" data-code="$1">Delete</a>','no,komentar,stem,sentimen');
-      $this->datatables->add_column('cek', '<input type="checkbox" class="data-check" value="$1">','username');
+      $this->datatables->add_column('cek', '<input type="checkbox" class="data-check" value="$1">','no');
       return $this->datatables->generate();
   }
 

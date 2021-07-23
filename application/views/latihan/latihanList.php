@@ -87,9 +87,11 @@ $(document).ready(function() {
                           "render": function(data, type, row) { 
                 if(data === '1') {
                   return '<span class="badge badge-success">Positif</span>' 
+                } else if(data === '0') {
+                  return '<span class="badge badge-danger">Negatif</span>' 
                 }
                 else {
-                  return '<span class="badge badge-danger">Negatif</span>'
+                  return '<span class="badge badge-warning">YNTKTS</span>'
                 }
 
               }},
@@ -147,7 +149,7 @@ function bulk_delete()
         {
             $.ajax({
                 type: "POST",
-                data: {id_partai:list_id},
+                data: {no:list_id},
                 url: "<?php echo site_url('latihan/bulk_delete')?>",
                 success: function(data)
                 {
