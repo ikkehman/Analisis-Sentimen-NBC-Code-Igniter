@@ -10,7 +10,6 @@ Class Analyze{
 	var $bobot;
 
 	public function __construct(){
-		ini_set('max_execution_time', 0); 
 $host = "localhost";
 $port = "3306";
 $dbname = "skp";
@@ -20,7 +19,7 @@ $db = new PDO('mysql:host='.$host.';port='.$port.';dbname='.$dbname.';charset=ut
 if(isset($_GET['persen']))
 {
 	$persen = $_GET['persen'];
-	$sql = $db->query("SELECT* FROM ( SELECT skripsi_komentar.*, @counter := @counter +1 AS counter FROM (select @counter:=0) AS initvar, skripsi_komentar ORDER BY `no` DESC ) AS X where counter <= (100/100 * @counter) ORDER BY `no` DESC");
+	$sql = $db->query("SELECT* FROM ( SELECT skripsi_komentar.*, @counter := @counter +1 AS counter FROM (select @counter:=0) AS initvar, skripsi_komentar ORDER BY `no` DESC ) AS X where counter <= ($persen/100 * @counter) ORDER BY `no` DESC");
 } else {
 	$sql = $db->query("SELECT * FROM vw_komentar");
 }		
@@ -167,70 +166,9 @@ $db = new PDO('mysql:host='.$host.';port='.$port.';dbname='.$dbname.';charset=ut
 					$bobot[$kata][$key] = 0;
 			}
 		}
-//start positif
-$s= array_keys($this->use['sentimen'], "1");
-$sumArray = array();
-foreach ($s as $kata) {
-foreach ($bobot as $k=>$subArray) {
-  foreach ($subArray as $id=>$value) {
-  	if ($id == $kata) {
-  		$sumArray[$k]+=$value;
-  	}
-    
-  }
-}
-}
-
-$xy = count($this->use['sentimen'])-1;
-$yzf =count(array_keys($this->use['sentimen'], "1"));
-foreach($this->tokend as $kata){
-	$tot[$kata] = ($sumArray[$kata] + 1) / ($yzf+$xy);
-}
-
-$temp = 1;
-foreach($tot as $key => $value) {
-$temp *= $value;
-}
-$nbc = $temp*0.5;
-//end positif
-
-//start negatif
-$sn= array_keys($this->use['sentimen'], "0");
-$sumArrayn = array();
-foreach ($sn as $kata) {
-foreach ($bobot as $k=>$subArray) {
-  foreach ($subArray as $id=>$value) {
-  	if ($id == $kata) {
-  		$sumArrayn[$k]+=$value;
-  	}
-    
-  }
-}
-}
-$xy = count($this->use['sentimen'])-1;
-$yz =count(array_keys($this->use['sentimen'], "0"));
-foreach($this->tokend as $kata){
-	$totn[$kata] = ($sumArrayn[$kata] + 1) / ($yz+$xy);
-}
-
-$tempn = 1;
-foreach($totn as $key => $value) {
-$tempn *= $value;
-}
-$nbcn = $tempn*0.5;
-//end negatif
-
-if ($nbc>$nbcn) {
-	$res = 1;
-  } else {
-	$res = 0;
-  }
 
 		$this->bobot = $bobot;
 		$this->idf = $idf;
-		$this->nbc = $nbc;
-		$this->nbcn = $nbcn;
-		$this->$res = $res;
 	}
 
 	public function hitung_jarak(){

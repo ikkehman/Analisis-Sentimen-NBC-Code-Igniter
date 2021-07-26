@@ -17,7 +17,7 @@
           </thead>
 										<tbody>
                 <?php foreach ($lengkap->result() as $k):?>
-<?php   
+<?php
         $no++;
         $salah = 0;
         $stem = explode(",",$k->stem);

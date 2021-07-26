@@ -110,63 +110,10 @@ class Multi extends MY_Controller {
             $out_text[$r] = $value;
             $sentimen[$r] = $analyze->single_process($value); //hasil analisa tersimpan di sini
             $stem[$r] = $analyze->input;
+            $nbc[$r] = $analyze->nbc;
+            $nbcn[$r] = $analyze->nbcn;
     
-    //positif
-    $s= array_keys($analyze->use['sentimen'], "1");
-    $sumArray = array();
-    foreach ($s as $kata) {
-    foreach ($analyze->bobot as $k=>$subArray) {
-      foreach ($subArray as $id=>$valuex) {
-        if ($id == $kata) {
-                      if ( ! isset($sumArrayn[$k])) {
-       $sumArrayn[$k][$r] = 0;
-    }
-          $sumArray[$k][$r]+=$valuex;
-        }
-      }
-    }
-    }
-    
-    $xy = count($analyze->use['sentimen']);
-    $yzf =count($analyze->use['sentimen'], "1");
-    foreach($analyze->tokend as $kata){
-      $tot[$kata] = ($sumArray[$kata][$r] + 1) / ($yzf+$xy);
-    }
-    
-    $temp = 1;
-    $temp *= $tot[$kata];
-    $nbc = $temp*0.5;
-    //end positif
-    
-    //negatif
-    $sn= array_keys($analyze->use['sentimen'], "0");
-    $sumArrayn = array();
-    foreach ($sn as $kata) {
-    foreach ($analyze->bobot as $k=>$subArray) {
-      foreach ($subArray as $id=>$valuex) {
-        if ($id == $kata) {
-                      if ( ! isset($sumArrayn[$k])) {
-       $sumArrayn[$k][$r] = 0;
-    }
-          $sumArrayn[$k][$r]+=$valuex;
-        }
-        
-      }
-    }
-    }
-    $xy = count($analyze->use['sentimen']);
-    $yz =count($analyze->use['sentimen'], "0");
-    foreach($analyze->tokend as $kata){
-      $totn[$kata] = ($sumArrayn[$kata][$r] + 1) / ($yz+$xy);
-    }
-    
-    $tempn = 1;
-    
-    $tempn *= $totn[$kata];
-    $nbcn = $tempn*0.5;
-    //end negatif
-    
-    if ($nbc>$nbcn) {
+    if ($nbc[$r]>$nbcn[$r]) {
       $res = 1;
     } else {
       $res = 0;
@@ -206,7 +153,9 @@ echo "dddddddddd";
     // Data untuk page events/add
     $data['r'] = $r;
     $data['stem'] = $stem;
-    $data['test'] = $imploded;
+    $data['test'] = $nbcn;
+    $data['test2'] = $nbc;
+    $data['test3'] = $text;
     $data['lang'] = $lang;
     $data['out_text'] = $out_text;
     $data['pageTitle'] = 'Tambah Data multi';

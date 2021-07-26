@@ -11,6 +11,9 @@ $analyze = new Analyze();
 <?php if(isset($_GET['persen'])) ?>
 <?php if($r > 0): ?>
 <?php if($r > 0): ?>
+	<?php var_dump ($lang);
+echo (" | <br> <br>");
+var_dump ($true);?>
       <div class="well">
 				<h2>Upload Set Analysis Result</h2>
 				<table class="data table table-sm pmd-table">
@@ -21,11 +24,14 @@ $analyze = new Analyze();
 							<th>Komentar</th>
 							<th>Stemmed Token</th>
 							<th>Sentimen</th>
+							<th>n</th>
+							<th>p</th>
 						</tr>
 					</thead>
 					<tbody>
 					<?php
 					$n = 1;
+					$salah = 0;
 					for($i=0; $i<$r;$i++){	
 						$stemmed = "";
 						if(count($stem[$i]) > 0){
@@ -41,14 +47,21 @@ $analyze = new Analyze();
 						else{
 							$out_sentimen = "<span class='btn btn-warning btn-sm'>Netral</span>";
 						}
-
+						if($lang[$i] == $true[$i]){
+							$trclass = "";
+						  } else {
+							$trclass = "class='ikkehred'";
+							$salah++;
+						  }
 						echo "
-						<tr>
+						<tr $trclass>
 							<td>$n</td>
 							<td>$sets</td>
 							<td>$out_text[$i]</td>
 							<td>$stemmed</td>
-              <td>$out_sentimen</td>
+							<td>$out_sentimen</td>
+							<td>$test[$i]</td>
+							<td>$test2[$i]</td>
 						</tr>
 						";
 						$n++;

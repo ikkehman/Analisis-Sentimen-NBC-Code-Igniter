@@ -149,7 +149,7 @@ $analyze = new Analyze();
 	?>
 
 <!--positif -->
-<?php
+<?php /*
 $s= array_keys($analyze->use['sentimen'], "1");
 $sumArray = array();
 foreach ($s as $kata) {
@@ -201,23 +201,24 @@ $tempn = 1;
 foreach($totn as $key => $value) {
 $tempn *= $value;
 }
-$nbcn = $tempn*0.5;
+$nbcn = $tempn*0.5; */
 ?>
 <!--end negatif-->
 
 <?php
-if ($nbc>$nbcn) {
+if ($analyze->nbc>$analyze->nbcn) {
 	$stt = "<span class='text-success'><b>Positif</b></span> ";
 } else {
 	$stt = "<span class='text-danger'><b>Negatif</b></span> ";
 }
 ?>
+<?php var_dump ($analyze->nbc) ?>
 
 <div class="card-body">
 	<strong><h6>Hasil Final : </h6></strong>
 	<ul>
-			<li><b>Positif :</b> <?php echo ($nbc) ?></li>
-			<li><b>Negatif :</b> <?php echo ($nbcn) ?></li>				
+			<li><b>Positif :</b> <?php echo ($analyze->nbc) ?></li>
+			<li><b>Negatif :</b> <?php echo ($analyze->nbcn) ?></li>				
 	</ul>
 </div>
 <hr>

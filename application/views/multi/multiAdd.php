@@ -23,7 +23,9 @@
       </div>
 
 	  <?php if($r > 0): ?>
-		<?php var_dump ($test);?>
+		<?php //var_dump ($out_text);
+echo (" | <br>");
+var_dump ($test3);?>
       <div class="well">
 				<h2>Upload Set Analysis Result</h2>
 				<table class="data table table-sm pmd-table">
@@ -34,6 +36,8 @@
 							<th>Komentar</th>
 							<th>Stemmed Token</th>
 							<th>Sentimen</th>
+							<th>n</th>
+							<th>p</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -61,7 +65,9 @@
 							<td>$sets</td>
 							<td>$out_text[$i]</td>
 							<td>$stemmed</td>
-              <td>$out_sentimen</td>
+			  				<td>$out_sentimen</td>
+							<td>$test[$i]</td>
+							<td>$test2[$i]</td>
 						</tr>
 						";
 						$n++;
