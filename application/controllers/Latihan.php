@@ -170,6 +170,7 @@ class Latihan extends MY_Controller {
     public function multi()
     {
       error_reporting (E_ALL ^ E_NOTICE);
+      ini_set('max_execution_time', 0); 
       $this->form_validation->set_rules('file_batch', 'File', 'required');
 
       $start = microtime(true);
