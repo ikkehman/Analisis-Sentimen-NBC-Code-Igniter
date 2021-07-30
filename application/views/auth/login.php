@@ -14,7 +14,7 @@
     <div class="row">
     <div class="header-w3l">
       <h1>
-      <a href="<?php echo base_url(''); ?>"><img align="center" style="max-width: 250px" src="<?php echo base_url('assets/images/logo.png'); ?>" alt="Kcdev Logo"></a></h1>
+      <a href="<?php echo base_url(''); ?>"><img align="center" style="max-width: 350px" src="<?php echo base_url('assets/images/logo.png'); ?>" alt="Kcdev Logo"></a></h1>
     </div>
 
     </div>

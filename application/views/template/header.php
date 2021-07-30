@@ -1,5 +1,5 @@
  <head>
-  <title>Sistem Pengaduan Tenag Kerja</title>
+  <title>Sistem Analisis Sentimen</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
  <!-- CSS  -->
@@ -27,7 +27,7 @@
           <img style="max-height: 45px;" src="<?php echo base_url('assets/images/logo-s.png'); ?>" alt="logo img" class="logo-img">
         </a>
         <a href="<?php echo base_url('dashboard'); ?>" class="logo">
-          <img style="max-height: 45px;" src="<?php echo base_url('assets/images/logo-b.png'); ?>" alt="navbar brand" class="navbar-brand">
+          <img style="max-height: 45px; max-width: 132px;" src="<?php echo base_url('assets/images/logo-b.png'); ?>" alt="navbar brand" class="navbar-brand">
         </a>
         <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon">
