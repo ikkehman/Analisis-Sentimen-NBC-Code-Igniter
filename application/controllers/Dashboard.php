@@ -10,12 +10,15 @@ class Dashboard extends MY_Controller
     $this->cekLogin();
 
     // Load model
-    //$this->load->model('model_dashboard');
+    $this->load->model('model_dashboard');
   }
 
     public function index()
   {
-    $data['pageTitle'] = 'Profile';
+    $data['pageTitle'] = 'Dashboard';
+    $data['hitungtot'] = $this->model_dashboard->hitungtot();
+    $data['hitungneg'] = $this->model_dashboard->hitungneg();
+    $data['hitungpos'] = $this->model_dashboard->hitungpos();
     $data['pageContent'] = $this->load->view('dashboard/admin', $data, TRUE);
     // Jalankan view template/layout
     $this->load->view('template/layout', $data);
