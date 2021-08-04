@@ -37,7 +37,6 @@ class Latihan extends MY_Controller {
   {
     // Jika form di submit jalankan blok kode ini
     if ($this->input->post('submit')) {
-
       $this->form_validation->set_rules('komentar', 'Komentar', 'required');
       $this->form_validation->set_rules('sentimen', 'Sentimen', 'required');
 
@@ -58,19 +57,16 @@ class Latihan extends MY_Controller {
         // cek jika query berhasil
         if ($query) $message = array('status' => true, 'message' => 'Berhasil menambahkan latihan');
         else $message = array('status' => true, 'message' => 'Gagal menambahkan latihan');
-
         // simpan message sebagai session
         $this->session->set_flashdata('message', $message);
-
         // refresh page
-        redirect('latihan/add', 'refresh');
+        //redirect('latihan/add', 'refresh');
       } 
     }
-    
     // Data untuk page events/add
         $data['latihan'] = $this->db->select('*')
                   ->from('skripsi_komentar')
-                  ->get();
+                  ->get();            
     $data['pageTitle'] = 'Tambah Data latihan';
     $data['pageContent'] = $this->load->view('latihan/latihanAdd', $data, TRUE);
 

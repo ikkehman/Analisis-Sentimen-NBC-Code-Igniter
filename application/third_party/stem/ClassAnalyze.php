@@ -11,6 +11,7 @@ Class Analyze{
 
 	public function __construct(){
 		ini_set('max_execution_time', 0); 
+		ini_set('LSAPI_MAX_PROCESS_TIME', 0); 
 $host = "localhost";
 $port = "3306";
 $dbname = "skp";

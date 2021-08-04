@@ -69,7 +69,7 @@ $analyze = new Analyze();
 	    </ol>
   </div>
   
-<?php /*	echo "<br>";
+<?php /* 	echo "<br>";
 	echo "<strong>Word Token : </strong>";
 	echo "<ol>";
 	foreach($analyze->tokend as $tknd){
@@ -148,9 +148,27 @@ $analyze = new Analyze();
 	///
 	?>
 
-<!--positif -->
+<!--counter-->	
 <?php /*
 $s= array_keys($analyze->use['sentimen'], "1");
+$yzf =count(array_keys($analyze->use['sentimen'], "1"));
+foreach ($s as $katap) {
+    $hitp[$katap] = $analyze->use['stem'][$katap];
+	}
+$npos = (count($hitp, COUNT_RECURSIVE)-$yzf);
+
+$sn= array_keys($analyze->use['sentimen'], "0");
+$yz =count(array_keys($analyze->use['sentimen'], "0"));
+foreach ($sn as $katan) {
+    $hitn[$katan] = $analyze->use['stem'][$katan];
+	}
+$nneg = (count($hitn, COUNT_RECURSIVE)-$yz);
+$tbig = $npos + $nneg;
+?>
+<!--end counter-->	
+
+<!--positif -->
+<?php 
 $sumArray = array();
 foreach ($s as $kata) {
 foreach ($analyze->bobot as $k=>$subArray) {
@@ -163,10 +181,8 @@ foreach ($analyze->bobot as $k=>$subArray) {
 }
 }
 
-$xy = count($analyze->use['sentimen'])-1;
-$yzf =count(array_keys($analyze->use['sentimen'], "1"));
 foreach($analyze->tokend as $kata){
-	$tot[$kata] = ($sumArray[$kata] + 1) / ($yzf+$xy);
+	$tot[$kata] = ($sumArray[$kata] + 1) / ($npos+$tbig);
 }
 
 $temp = 1;
@@ -179,22 +195,20 @@ $nbc = $temp*0.5;
 
 <!--negatif-->
 <?php
-$sn= array_keys($analyze->use['sentimen'], "0");
 $sumArrayn = array();
-foreach ($sn as $kata) {
+foreach ($sn as $katan) {
 foreach ($analyze->bobot as $k=>$subArray) {
   foreach ($subArray as $id=>$value) {
-  	if ($id == $kata) {
+  	if ($id == $katan) {
   		$sumArrayn[$k]+=$value;
   	}
     
   }
 }
 }
-$xy = count($analyze->use['sentimen'])-1;
-$yz =count(array_keys($analyze->use['sentimen'], "0"));
+
 foreach($analyze->tokend as $kata){
-	$totn[$kata] = ($sumArrayn[$kata] + 1) / ($yz+$xy);
+	$totn[$kata] = ($sumArrayn[$kata] + 1) / ($nneg+$tbig);
 }
 
 $tempn = 1;
@@ -204,7 +218,6 @@ $tempn *= $value;
 $nbcn = $tempn*0.5; */
 ?>
 <!--end negatif-->
-
 <?php
 if ($analyze->nbc>$analyze->nbcn) {
 	$stt = "<span class='text-success'><b>Positif</b></span> ";
@@ -212,7 +225,6 @@ if ($analyze->nbc>$analyze->nbcn) {
 	$stt = "<span class='text-danger'><b>Negatif</b></span> ";
 }
 ?>
-<?php var_dump ($analyze->nbc) ?>
 
 <div class="card-body">
 	<strong><h6>Hasil Final : </h6></strong>

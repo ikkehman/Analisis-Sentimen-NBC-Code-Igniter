@@ -22,7 +22,23 @@ function stem($string){
 			$out[] = $naz->nazief($item);
 		}
 	}
-	return $out;
+	$host = "localhost";
+	$port = "3306";
+	$dbname = "skp";
+	$dbuser = "root";
+	$dbpass = "";
+	$db = new PDO('mysql:host='.$host.';port='.$port.';dbname='.$dbname.';charset=utf8', $dbuser, $dbpass);
+		$sql = $db->query("SELECT stopword FROM stopword_list");
+		foreach($sql as $row){
+			$stopword[] = $row['stopword'];
+		}
+	
+		foreach($out as $inp){
+			if(!in_array($inp, $stopword)){
+				$saved[] = $inp;
+			}
+		}
+		return $saved;
 }
 
 function show_alert(){

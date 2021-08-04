@@ -42,7 +42,7 @@ class Valid extends MY_Controller {
                           ->from('skripsi_analisa')
                           ->group_by('tgl')
                           ->get();
-    $data['pageTitle'] = 'Data Batch';
+    $data['pageTitle'] = 'Data Pengujian';
     $data['pageContent'] = $this->load->view('valid/validList', $data, TRUE);
 
     // Jalankan view template/layout
@@ -94,7 +94,7 @@ $lang[$r] = $res;
     $data['lang'] = $lang;
     $data['true'] = $true;
     $data['out_text'] = $out_text;
-    $data['pageTitle'] = 'Data Batch';
+    $data['pageTitle'] = 'Data Pengujian';
     $data['pageContent'] = $this->load->view('valid/validAdd', $data, TRUE);
 
     // Jalankan view template/layout
@@ -129,7 +129,7 @@ $lang[$r] = $res;
     if (!$valid) show_404();
 
     // Data untuk page events/add
-    $data['pageTitle'] = 'Edit Data valid';
+    $data['pageTitle'] = 'Edit Data Pengujian';
     $data['valid'] = $valid;
     $data['pageContent'] = $this->load->view('valid/validEdit', $data, TRUE);
 
@@ -252,7 +252,7 @@ $data['no'] = $no;
 $data['total_data'] = $total;
 $data['total_salah'] = $tosa;
 $data['lengkap'] = $lengkap;
-$data['pageTitle'] = 'Data Analysis';
+$data['pageTitle'] = 'Data Pengujian';
 $data['pageContent'] = $this->load->view('valid/validEdit', $data, TRUE);
 
 // Jalankan view template/layout
