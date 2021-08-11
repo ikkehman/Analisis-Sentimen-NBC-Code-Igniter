@@ -1,5 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-
+require('./application/third_party/phpoffice/vendor/autoload.php');
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 class Latihan extends MY_Controller {
 
   public function __construct()
@@ -9,6 +11,7 @@ class Latihan extends MY_Controller {
     include APPPATH . 'third_party/stem/ClassAnalyze.php';
     include APPPATH . 'third_party/spreadsheet-reader/php-excel-reader/excel_reader2.php';
     include APPPATH . 'third_party/spreadsheet-reader/SpreadsheetReader.php';
+
     //require_once APPPATH.'third_party/stem/ClassNazief.php';
     //require_once('../third_party/stem/ClassNazief.php');
     // Cek apakah event sudah login
@@ -282,6 +285,49 @@ class Latihan extends MY_Controller {
       }  
       echo json_encode($data);
   
+    }
+
+    public function kuchiyose()
+    {
+    
+        $semua_latihan = $this->model_latihan->get()->result();  
+
+         $spreadsheet = new Spreadsheet;
+
+         $spreadsheet->setActiveSheetIndex(0)
+                     ->setCellValue('A1', 'No')
+                     ->setCellValue('B1', 'Username')
+                     ->setCellValue('C1', 'Komentar')
+                     ->setCellValue('D1', 'Stem')
+                     ->setCellValue('E1', 'Sentimen');
+
+         $kolom = 2;
+         $nomor = 1;
+         foreach($semua_latihan as $latihan) {
+          if ($latihan->sentimen == 1) {
+            $maka= "Positif";
+          } else {
+            $maka= "Negatif";
+          }
+              $spreadsheet->setActiveSheetIndex(0)
+                          ->setCellValue('A' . $kolom, $nomor)
+                          ->setCellValue('B' . $kolom, "dd")
+                          ->setCellValue('C' . $kolom, $latihan->komentar)
+                          ->setCellValue('D' . $kolom, $latihan->stem)
+                          ->setCellValue('E' . $kolom, $maka);
+
+              $kolom++;
+              $nomor++;
+
+         }
+
+         $writer = new Xlsx($spreadsheet);
+
+         header('Content-Type: application/vnd.ms-excel');
+   header('Content-Disposition: attachment;filename="Latihan.xlsx"');
+   header('Cache-Control: max-age=0');
+
+   $writer->save('php://output');
     }
 
 }
