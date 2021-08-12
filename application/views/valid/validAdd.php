@@ -26,6 +26,10 @@ $analyze = new Analyze();
 					<tbody>
 					<?php
 					$n = 1;
+					$tp = 0;
+					$tn = 0;
+					$fp = 0;
+					$ff = 0;
 					$salah = 0;
 					for($i=0; $i<$r;$i++){	
 						$stemmed = "";
@@ -48,6 +52,18 @@ $analyze = new Analyze();
 							$trclass = "class='ikkehred'";
 							$salah++;
 						  }
+						  if($lang[$i] == 1 && $lang[$i] == $true[$i]){
+							$tp++;
+						}
+						else if($lang[$i] == 1 && $lang[$i] !== $true[$i]){
+							$tn++;
+						}
+						else if($lang[$i] == 0 && $lang[$i] == $true[$i]){
+							$ff++;
+						}
+						else if($lang[$i] == 0 && $lang[$i] !== $true[$i]){
+							$fp++;
+						}
 						echo "
 						<tr $trclass>
 							<td>$n</td>
@@ -64,6 +80,28 @@ $analyze = new Analyze();
 				</table>
         <?php endif; ?>
         <?php endif; ?>
+		</div>
+		<table class="table table-bordered">
+										<thead>
+											<tr>
+												<th scope="col">#</th>
+												<th scope="col">Positif</th>
+												<th scope="col">Negatif</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><b>Positif</b></td>
+												<td><?php echo $tp ?></td>
+												<td><?php echo $tn ?></td>
+											</tr>
+											<tr>
+												<td><b>Negatif</b></td>
+												<td><?php echo $fp ?></td>
+												<td><?php echo $ff ?></td>
+											</tr>
+										</tbody>
+									</table>
 <script type="text/javascript">
     function loadDataset()
     {
