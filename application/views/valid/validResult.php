@@ -1,16 +1,10 @@
-<?php
-error_reporting (E_ALL ^ E_NOTICE);
-$analyze = new Analyze();
-?>
     <div class="card col-12">
       <div class="card-header">
           <div class="card-title"><?php echo $pageTitle; ?></div>
       </div>
       <br>  
 <br>
-<?php if(isset($_GET['persen'])) ?>
-<?php if($r > 0): ?>
-<?php if($r > 0): ?>
+
       <div class="well">
 				<h2>Upload Set Analysis Result</h2>
 				<table class="data table table-sm pmd-table">
@@ -78,8 +72,7 @@ $analyze = new Analyze();
 					?>
 					</tbody>
 				</table>
-        <?php endif; ?>
-        <?php endif; ?>
+
 		</div>
 		<table class="table table-bordered">
 										<thead>
