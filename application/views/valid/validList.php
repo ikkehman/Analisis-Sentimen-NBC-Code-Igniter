@@ -17,6 +17,7 @@ $analyze = new Analyze();
 										</select>
                   </div>
                   <button type="submit" name="submit" value="ikkeh" class="btn btn-success">Process</button>
+                  <button type="view" name="view" value="view" class="btn btn-info">View</button>
 </form>   
 <script type="text/javascript">
     function loadDataset()

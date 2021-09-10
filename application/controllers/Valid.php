@@ -37,6 +37,17 @@ class Valid extends MY_Controller {
       } 
     }
 
+    if ($this->input->post('view')) {
+
+      $this->form_validation->set_rules('persen', 'Persentase', 'required');
+
+      // Jalankan validasi jika semuanya benar maka lanjutkan
+      if ($this->form_validation->run() === TRUE) {
+        // refresh page
+        redirect('valid/result?persen='.$this->input->post('persen'), 'refresh');
+      } 
+    }
+
     // Data untuk page index
     $data['valid'] = $this->db->select('*')
                           ->from('skripsi_analisa')
@@ -57,6 +68,9 @@ class Valid extends MY_Controller {
     $persent= 100-(intval($_GET['persen']));
     $uji= $this->db->query("SELECT * FROM ( SELECT skripsi_komentar.*, @counter := @counter +1 AS counter FROM (select @counter:=0) AS initvar, skripsi_komentar ORDER BY `no` ASC ) AS X where counter <= ($persent/100 * @counter) ORDER BY `no` DESC");
     $r=0;
+    $sets = intval($_GET['persen']);
+    $tgl = date("Y-m-d H:i:s");
+
     foreach($uji->result() as $value){
       $out_text[$r] = $value->komentar;
       $true[$r] = (int)$value->sentimen;
@@ -72,6 +86,16 @@ class Valid extends MY_Controller {
       }
 
 $lang[$r] = $res;
+            $imploded = implode(",",$stem[$r]);
+            $data = array(
+              'sets' => $sets,
+              'tgl' => $tgl,
+              'komentar' => $out_text[$r],
+              'stem' => $imploded,
+              'sentimen' => $res,
+              'flag' => $value->sentimen,
+            );
+            $query = $this->model_valid->insert($data);
       $r++;
     }
 
@@ -101,25 +125,12 @@ $lang[$r] = $res;
     $this->load->view('template/layout', $data);
   }
 
-  public function edit($id_valid = null)
+  public function result()
   {
-    // Jika form di submit jalankan blok kode ini
-    if ($this->input->post('submit')) {
-
-      $this->form_validation->set_rules('sets', 'Tanggal', 'required');
-
-      // Jalankan validasi jika semuanya benar maka lanjutkan
-      if ($this->form_validation->run() === TRUE) {
-  
-        // simpan message sebagai session
-        $this->session->set_flashdata('message', $message);
-
-        // refresh page
-      } 
-    }
-    
+    $last = $this->db->select('tgl')->order_by('tgl',"desc")->limit(1)->get('skripsi_rekap');
+    $sets = intval($_GET['persen']);
     // Ambil data event dari database
-    $valid = $this->model_valid->get_where(array('id_valid' => $id_valid))->row();
+    $valid = $this->model_valid->get_where(array('sets' => $sets, 'tgl' => $last))->row();
 
     // Mengubah format tanggal dari database
     //$kejuruan->priode = date_format(date_create($kejuruan->priode), 'd-m-Y');
@@ -131,7 +142,7 @@ $lang[$r] = $res;
     // Data untuk page events/add
     $data['pageTitle'] = 'Edit Data Pengujian';
     $data['valid'] = $valid;
-    $data['pageContent'] = $this->load->view('valid/validEdit', $data, TRUE);
+    $data['pageContent'] = $this->load->view('valid/validResult', $data, TRUE);
 
     // Jalankan view template/layout
     $this->load->view('template/layout', $data);

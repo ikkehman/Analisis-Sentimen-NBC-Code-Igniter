@@ -136,7 +136,6 @@ class Multi extends MY_Controller {
     
             $r++;
           }
-echo "dddddddddd";
           //endgame
         }
 

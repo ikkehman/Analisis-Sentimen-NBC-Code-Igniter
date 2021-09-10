@@ -1,7 +1,7 @@
 <?php
   class Model_valid extends CI_Model {
 
-    public $table = 'skripsi_analisa';
+    public $table = 'skripsi_rekap';
 
     public function get()
     {
