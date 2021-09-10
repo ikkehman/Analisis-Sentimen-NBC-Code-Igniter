@@ -11,7 +11,6 @@
 					<thead>
 						<tr>
 							<th>#</th>
-							<th>ID Set</th>
 							<th>Komentar</th>
 							<th>Stemmed Token</th>
 							<th>Sentimen</th>
@@ -34,36 +33,35 @@
 						if($row->sentimen == 0){
 							$out_sentimen = "<span class='btn btn-danger btn-sm'>Negatif</span>";
 						}
-						else if($lang[$i] == 1){
+						else if($row->sentimen == 1){
 							$out_sentimen = "<span class='btn btn-success btn-sm'>Positif</span>";
 						}
 						else{
 							$out_sentimen = "<span class='btn btn-warning btn-sm'>Netral</span>";
 						}
-						if($lang[$i] == $true[$i]){
+						if($row->sentimen == $true[$i]){
 							$trclass = "";
 						  } else {
 							$trclass = "class='ikkehred'";
 							$salah++;
 						  }
-						  if($lang[$i] == 1 && $lang[$i] == $true[$i]){
+						  if($row->sentimen == 1 && $row->sentimen == $row->flag){
 							$tp++;
 						}
-						else if($lang[$i] == 1 && $lang[$i] !== $true[$i]){
+						else if($row->sentimen == 1 && $row->sentimen !== $row->flag){
 							$tn++;
 						}
-						else if($lang[$i] == 0 && $lang[$i] == $true[$i]){
+						else if($row->sentimen == 0 && $row->sentimen == $row->flag){
 							$ff++;
 						}
-						else if($lang[$i] == 0 && $lang[$i] !== $true[$i]){
+						else if($row->sentimen == 0 && $row->sentimen !== $row->flag){
 							$fp++;
 						}
 						echo "
 						<tr $trclass>
 							<td>$n</td>
-							<td>$sets</td>
-							<td>$out_text[$i]</td>
-							<td>$stemmed</td>
+							<td>$row->komentar</td>
+							<td>$row->stem</td>
 							<td>$out_sentimen</td>
 						</tr>
 						";
