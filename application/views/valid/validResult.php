@@ -25,13 +25,13 @@
 					$fp = 0;
 					$ff = 0;
 					$salah = 0;
-					for($i=0; $i<$r;$i++){	
+					foreach($valid->result() as $row){
 						$stemmed = "";
-						if(count($stem[$i]) > 0){
-							$stemmed = "<span class='label label-primary'>".implode("</span> <span class='label label-primary'>",$stem[$i])."</span>";
+						if(count($row->stem) > 0){
+							$stemmed = "<span class='label label-primary'>".implode("</span> <span class='label label-primary'>",$row->stem)."</span>";
 						}
 
-						if($lang[$i] == 0){
+						if($row->sentimen == 0){
 							$out_sentimen = "<span class='btn btn-danger btn-sm'>Negatif</span>";
 						}
 						else if($lang[$i] == 1){
