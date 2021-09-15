@@ -127,11 +127,11 @@ $lang[$r] = $res;
 
   public function result()
   {
-    $last = $this->db->select('tgl')->order_by('tgl',"desc")->limit(1)->get('skripsi_rekap');
     $sets = intval($_GET['persen']);
+    $last = $this->db->select('tgl')->where(array('sets' => $sets))->order_by('tgl',"desc")->limit(1)->get('skripsi_rekap');
     // Ambil data event dari database
-    $valid = $this->model_valid->get_where(array('sets' => $sets, 'tgl' => $last))->row();
-
+    $valid = $this->model_valid->get_where(array('sets' => $sets));
+    echo $last;
     // Mengubah format tanggal dari database
     //$kejuruan->priode = date_format(date_create($kejuruan->priode), 'd-m-Y');
     
