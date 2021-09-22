@@ -25,11 +25,10 @@
 					$ff = 0;
 					$salah = 0;
 					foreach($valid->result() as $row){
-						$stemmed = "";
-						if(count($row->stem) > 0){
-							$stemmed = "<span class='label label-primary'>".implode("</span> <span class='label label-primary'>",$row->stem)."</span>";
-						}
-
+						$stem = explode(",",$row->stem);
+						if(count($stem) > 0){
+							$stemmed = "<span class='badge badge-count'>".implode("</span> <span class='badge badge-count'>",$stem)."</span>";
+				  }
 						if($row->sentimen == 0){
 							$out_sentimen = "<span class='btn btn-danger btn-sm'>Negatif</span>";
 						}
@@ -39,7 +38,7 @@
 						else{
 							$out_sentimen = "<span class='btn btn-warning btn-sm'>Netral</span>";
 						}
-						if($row->sentimen == $true[$i]){
+						if($row->sentimen == $row->flag){
 							$trclass = "";
 						  } else {
 							$trclass = "class='ikkehred'";
@@ -61,7 +60,7 @@
 						<tr $trclass>
 							<td>$n</td>
 							<td>$row->komentar</td>
-							<td>$row->stem</td>
+							<td>$stemmed</td>
 							<td>$out_sentimen</td>
 						</tr>
 						";

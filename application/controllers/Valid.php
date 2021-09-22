@@ -128,10 +128,9 @@ $lang[$r] = $res;
   public function result()
   {
     $sets = intval($_GET['persen']);
-    $last = $this->db->select('tgl')->where(array('sets' => $sets))->order_by('tgl',"desc")->limit(1)->get('skripsi_rekap');
+    $last = $this->db->select('tgl')->where(array('sets' => $sets))->order_by('tgl',"desc")->limit(1)->get('skripsi_rekap')->row()->tgl;
     // Ambil data event dari database
-    $valid = $this->model_valid->get_where(array('sets' => $sets));
-    echo $last;
+    $valid = $this->model_valid->get_where(array('sets' => $sets,'tgl' => $last));
     // Mengubah format tanggal dari database
     //$kejuruan->priode = date_format(date_create($kejuruan->priode), 'd-m-Y');
     

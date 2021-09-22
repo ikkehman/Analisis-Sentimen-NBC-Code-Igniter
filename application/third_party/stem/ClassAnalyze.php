@@ -23,7 +23,7 @@ if(isset($_GET['persen']))
 	$persen = $_GET['persen'];
 	$sql = $db->query("SELECT* FROM ( SELECT skripsi_komentar.*, @counter := @counter +1 AS counter FROM (select @counter:=0) AS initvar, skripsi_komentar ORDER BY `no` DESC ) AS X where counter <= (100/100 * @counter) ORDER BY `no` DESC");
 } else {
-	$sql = $db->query("SELECT * FROM vw_komentar");
+	$sql = $db->query("SELECT * FROM skripsi_komentar");
 }		
 		$arr = array();
 		$no = 0;
@@ -232,6 +232,7 @@ if ($nbc>$nbcn) {
 		$this->nbc = $nbc;
 		$this->nbcn = $nbcn;
 		$this->$res = $res;
+		$this->$sumArrayn = $sumArrayn;
 	}
 
 	public function hitung_jarak(){

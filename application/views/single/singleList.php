@@ -69,7 +69,7 @@ $analyze = new Analyze();
 	    </ol>
   </div>
   
-<?php /* 	echo "<br>";
+<?php  	echo "<br>";
 	echo "<strong>Word Token : </strong>";
 	echo "<ol>";
 	foreach($analyze->tokend as $tknd){
@@ -144,12 +144,12 @@ $analyze = new Analyze();
 	echo "</tr>";
 
 	echo "</table>";
-*/
+
 	///
 	?>
 
 <!--counter-->	
-<?php /*
+<?php 
 $s= array_keys($analyze->use['sentimen'], "1");
 $yzf =count(array_keys($analyze->use['sentimen'], "1"));
 foreach ($s as $katap) {
@@ -194,7 +194,7 @@ $nbc = $temp*0.5;
 <!--end positif-->
 
 <!--negatif-->
-<?php
+<?php /*
 $sumArrayn = array();
 foreach ($sn as $katan) {
 foreach ($analyze->bobot as $k=>$subArray) {
@@ -225,7 +225,41 @@ if ($analyze->nbc>$analyze->nbcn) {
 	$stt = "<span class='text-danger'><b>Negatif</b></span> ";
 }
 ?>
+<?php print_r ($analyze->bobot); ?>
+<?php echo ('<br> end bobot <br>'); ?>
+<?php print_r ($sn); ?>
+<?php echo ('<br> end sentimen negatif <br>'); ?>
+<?php
+foreach ($sn as $wk) {
+	$wrd[$wk] = $wk;
+	foreach ($analyze->bobot as $kz=>$subArrayz) {
+		$result = array_intersect_key($subArrayz, $wrd);
+			$sumArrayw[$kz] += $result[$wk];
+		  }
+  }
 
+  //print_r($result);
+  print_r($sumArrayw);
+//$result = array_intersect($sn, $uji);
+echo "<br> end result <br>";
+print_r($wrd);
+echo "<br> end word <br>";
+?>
+<?php
+$sumArrayn = array();
+foreach ($sn as $katan) {
+foreach ($analyze->bobot as $kx=>$subArrayx) {
+  foreach ($subArrayx as $idx=>$valuex) {
+  	if ($idx == $katan) {
+  		$sumArraynx[$kx]+= $valuex;
+  	}
+    
+  }
+}
+
+}
+print_r ($kx);
+?>
 <div class="card-body">
 	<strong><h6>Hasil Final : </h6></strong>
 	<ul>
