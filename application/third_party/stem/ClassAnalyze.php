@@ -172,15 +172,12 @@ $db = new PDO('mysql:host='.$host.';port='.$port.';dbname='.$dbname.';charset=ut
 $s= array_keys($this->use['sentimen'], "1");
 $sumArray = array();
 foreach ($s as $kata) {
-foreach ($bobot as $k=>$subArray) {
-  foreach ($subArray as $id=>$value) {
-  	if ($id == $kata) {
-  		$sumArray[$k]+=$value;
-  	}
-    
+	$select[$kata] = $kata;
+	foreach ($bobot as $k=>$subArray) {
+		$result = array_intersect_key($subArray, $select);
+			$sumArray[$k] += $result[$kata];
+		  }
   }
-}
-}
 
 $xy = count($this->use['sentimen'])-1;
 $yzf =count(array_keys($this->use['sentimen'], "1"));
@@ -199,15 +196,12 @@ $nbc = $temp*0.5;
 $sn= array_keys($this->use['sentimen'], "0");
 $sumArrayn = array();
 foreach ($sn as $kata) {
-foreach ($bobot as $k=>$subArray) {
-  foreach ($subArray as $id=>$value) {
-  	if ($id == $kata) {
-  		$sumArrayn[$k]+=$value;
-  	}
-    
+	$selectn[$kata] = $kata;
+	foreach ($bobot as $k=>$subArray) {
+		$result = array_intersect_key($subArray, $selectn);
+			$sumArrayn[$k] += $result[$kata];
+		  }
   }
-}
-}
 $xy = count($this->use['sentimen'])-1;
 $yz =count(array_keys($this->use['sentimen'], "0"));
 foreach($this->tokend as $kata){
