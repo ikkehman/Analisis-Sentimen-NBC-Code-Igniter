@@ -174,13 +174,13 @@ $sumArray = array();
 foreach ($s as $kata) {
 	$select[$kata] = $kata;
 	foreach ($bobot as $k=>$subArray) {
-		$result = array_intersect_key($subArray, $select);
-			$sumArray[$k] += $result[$kata];
+		$resultp = array_intersect_key($subArray, $select);
+			$sumArray[$k] += $resultp[$kata];
 		  }
   }
 
 $xy = count($this->use['sentimen'])-1;
-$yzf =count(array_keys($this->use['sentimen'], "1"));
+$yzf =count($sumArray);
 foreach($this->tokend as $kata){
 	$tot[$kata] = ($sumArray[$kata] + 1) / ($yzf+$xy);
 }
@@ -203,7 +203,7 @@ foreach ($sn as $kata) {
 		  }
   }
 $xy = count($this->use['sentimen'])-1;
-$yz =count(array_keys($this->use['sentimen'], "0"));
+$yz =count($result);
 foreach($this->tokend as $kata){
 	$totn[$kata] = ($sumArrayn[$kata] + 1) / ($yz+$xy);
 }
@@ -227,6 +227,10 @@ if ($nbc>$nbcn) {
 		$this->nbcn = $nbcn;
 		$this->$res = $res;
 		$this->$sumArrayn = $sumArrayn;
+		$this->totn = $totn;
+		$this->yz = $yz;
+		$this->yzf = $yzf;
+		$this->xy = $xy;
 	}
 
 	public function hitung_jarak(){

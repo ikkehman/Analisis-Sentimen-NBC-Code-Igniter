@@ -70,7 +70,7 @@ $analyze = new Analyze();
   </div>
   
 <?php  
-/*
+
 echo "<br>";
 	echo "<strong>Word Token : </strong>";
 	echo "<ol>";
@@ -105,7 +105,7 @@ echo "<br>";
 		for($i=1; $i<=$jml; $i++){
 			echo "<td>$ar[$i]</td>";
 		}
-		echo "<td>".$analyze->df[$kata]."s"."</td>";
+		echo "<td>".$analyze->df[$kata]."</td>";
 		echo "</tr>";
 	}
 	echo "</table>";
@@ -146,7 +146,7 @@ echo "<br>";
 	echo "</tr>";
 
 	echo "</table>";
-*/
+
 	///
 	?>
 
@@ -232,6 +232,9 @@ if ($analyze->nbc>$analyze->nbcn) {
 }
 ?>
 <div class="card-body">
+
+<?php print_r ($analyze->totn) ?>
+<?php echo ($analyze->yz.' | '. $analyze->yzf.' | '.$analyze->xy) ?>
 	<strong><h6>Hasil Final : </h6></strong>
 	<ul>
 			<li><b>Positif :</b> <?php echo ($analyze->nbc) ?></li>
