@@ -235,7 +235,7 @@ class Latihan extends MY_Controller {
         $data['stem'] = $stem;
         $data['out_text'] = $out_text;
         $data['test'] = $imploded;
-        $data['pageTitle'] = 'Tambah Data multi';
+        $data['pageTitle'] = 'Tambah Data Multi Latih';
         $data['pageContent'] = $this->load->view('latihan/latihanMulti', $data, TRUE);
     
         // Jalankan view template/layout

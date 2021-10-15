@@ -1,4 +1,4 @@
-<title>Sistem Perhitungan Caleg</title>
+<title>Sistem Analisis Sentimen</title>
 <!-- css files -->
 <link rel="stylesheet" href="<?php echo base_url('assets/css/font-awesome.css'); ?>"> <!-- Font-Awesome-Icons-CSS -->
 <link rel="stylesheet" href="<?php echo base_url('assets/css/login.css'); ?>" type="text/css" media="all" /> <!-- Style-CSS --> 
