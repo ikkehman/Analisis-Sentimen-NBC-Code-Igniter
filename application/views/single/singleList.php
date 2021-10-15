@@ -232,9 +232,6 @@ if ($analyze->nbc>$analyze->nbcn) {
 }
 ?>
 <div class="card-body">
-
-<?php print_r ($analyze->totn) ?>
-<?php echo ($analyze->yz.' | '. $analyze->yzf.' | '.$analyze->xy) ?>
 	<strong><h6>Hasil Final : </h6></strong>
 	<ul>
 			<li><b>Positif :</b> <?php echo ($analyze->nbc) ?></li>

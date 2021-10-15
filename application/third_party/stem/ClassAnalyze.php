@@ -153,9 +153,17 @@ $db = new PDO('mysql:host='.$host.';port='.$port.';dbname='.$dbname.';charset=ut
 		foreach($this->tf as $kk=>$vv){
 			$ddf[$kk] = ($this->df[$kk] == 0) ? 1 : ($jumlahdata / $this->df[$kk]);
 			$idf[$kk] = log10($ddf[$kk]);
+			for($i=1; $i<=$jumlahdata; $i++){
+				if(!isset($nnya[$i]))
+					$nnya[$i] = $vv[$i];
+				else{
+					$nnya[$i] += $vv[$i];
+				}
+			}
 		}
-
-
+		for($i=1; $i<=$jumlahdata; $i++){
+			$bigt += $nnya[$i];
+		}
 		$bobot = array();
 				foreach($this->token as $kata){
 			foreach($this->use['stem'] as $key=>$value){
@@ -173,16 +181,15 @@ $s= array_keys($this->use['sentimen'], "1");
 $sumArray = array();
 foreach ($s as $kata) {
 	$select[$kata] = $kata;
+	$yzf += $nnya[$kata];
 	foreach ($bobot as $k=>$subArray) {
 		$resultp = array_intersect_key($subArray, $select);
 			$sumArray[$k] += $resultp[$kata];
 		  }
   }
 
-$xy = count($this->use['sentimen'])-1;
-$yzf =count($sumArray);
 foreach($this->tokend as $kata){
-	$tot[$kata] = ($sumArray[$kata] + 1) / ($yzf+$xy);
+	$tot[$kata] = ($sumArray[$kata] + 1) / ($yzf+$bigt);
 }
 
 $temp = 1;
@@ -195,17 +202,17 @@ $nbc = $temp*0.5;
 //start negatif
 $sn= array_keys($this->use['sentimen'], "0");
 $sumArrayn = array();
+
 foreach ($sn as $kata) {
 	$selectn[$kata] = $kata;
+	$yz += $nnya[$kata];
 	foreach ($bobot as $k=>$subArray) {
 		$result = array_intersect_key($subArray, $selectn);
 			$sumArrayn[$k] += $result[$kata];
 		  }
   }
-$xy = count($this->use['sentimen'])-1;
-$yz =count($result);
 foreach($this->tokend as $kata){
-	$totn[$kata] = ($sumArrayn[$kata] + 1) / ($yz+$xy);
+	$totn[$kata] = ($sumArrayn[$kata] + 1) / ($yz+$bigt);
 }
 
 $tempn = 1;
@@ -225,12 +232,16 @@ if ($nbc>$nbcn) {
 		$this->idf = $idf;
 		$this->nbc = $nbc;
 		$this->nbcn = $nbcn;
-		$this->$res = $res;
-		$this->$sumArrayn = $sumArrayn;
+		$this->res = $res;
+		$this->sumArrayn = $sumArrayn;
 		$this->totn = $totn;
 		$this->yz = $yz;
 		$this->yzf = $yzf;
 		$this->xy = $xy;
+		$this->resultp = $resultp;
+		$this->result = $result;
+		$this->bigt = $bigt;
+		$this->wx = $wx;
 	}
 
 	public function hitung_jarak(){

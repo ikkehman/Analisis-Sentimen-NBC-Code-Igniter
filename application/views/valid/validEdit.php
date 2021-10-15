@@ -64,7 +64,6 @@
     ?>
                       <tr <?php echo $trclass?>>
 												<td><?php echo $no?></td>
-												<td><?php echo $k->tgl?></td>
 												<td><?php echo $k->komentar?></td>
                         <td><?php echo $stemmed?></td>
                         <td><?php echo $senti?></td>
