@@ -1,7 +1,7 @@
 <?php
   class Model_master extends CI_Model {
 
-    public $table = 'skripsi_komentar';
+    public $table = 'komentar';
 
     public function get()
     {
@@ -60,7 +60,7 @@
       
       
       function get_setting($param){
-        $sql = query("SELECT * FROM skripsi_setting WHERE param = ".quote($param));
+        $sql = query("SELECT * FROM setting WHERE param = ".quote($param));
         if($sql->rowCount() > 0){
           //setting ketemu
           $row = $sql->fetch();
@@ -70,7 +70,7 @@
       }
       
       function change_setting($param,$newvalue){
-        $sql = query("UPDATE skripsi_setting SET value = ".quote($newvalue)." WHERE param = ".quote($param));
+        $sql = query("UPDATE setting SET value = ".quote($newvalue)." WHERE param = ".quote($param));
         return true;
       }
       

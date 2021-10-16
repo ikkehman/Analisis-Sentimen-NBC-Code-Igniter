@@ -38,7 +38,7 @@ class Multi extends MY_Controller {
     }
     // Data untuk page index
     $data['multi'] = $this->db->select('*')
-                          ->from('skripsi_analisa')
+                          ->from('analisa')
                           ->group_by('tgl')
                           ->get();
     $data['pageTitle'] = 'Data Batch';
@@ -62,7 +62,7 @@ class Multi extends MY_Controller {
       $filename = $file['name'];
       $ext = get_extension($filename);
 
-        $last = $this->db->select('sets')->order_by('sets',"desc")->limit(1)->get('skripsi_analisa');
+        $last = $this->db->select('sets')->order_by('sets',"desc")->limit(1)->get('analisa');
         foreach ($last->result() as $row){$naruto=$row->sets;}
         if(empty($naruto) or $naruto == 0){
           $sets = 1;
@@ -227,7 +227,7 @@ class Multi extends MY_Controller {
         //button
         $dataset = $_GET['dataset'];
         $lengkap = $this->db
-                          ->get_where('skripsi_analisa',array('sets'=>$dataset));
+                          ->get_where('analisa',array('sets'=>$dataset));
         foreach ($lengkap->result() as $k){
           $nucc = $k->sets;
         }
@@ -305,12 +305,12 @@ class Multi extends MY_Controller {
       $lengkap = array();
       $no = 0;
       $lengkap  = $this->db->select('*')
-                  ->get_where('skripsi_analisa',array('sets'=>$id_multi));
+                  ->get_where('analisa',array('sets'=>$id_multi));
       $total    = $this->db->select('COUNT(id) as total')
-                  ->from('skripsi_analisa')
+                  ->from('analisa')
                   ->where(array('sets' => $id_multi))
                   ->get();
-      $tosa     = $this->db->query("SELECT COUNT(id) AS total_salah FROM skripsi_analisa WHERE (truesentimen IS NOT NULL AND sentimen <> truesentimen AND `sets` = $id_multi)");
+      $tosa     = $this->db->query("SELECT COUNT(id) AS total_salah FROM analisa WHERE (truesentimen IS NOT NULL AND sentimen <> truesentimen AND `sets` = $id_multi)");
 $data['no'] = $no;
 $data['total_data'] = $total;
 $data['total_salah'] = $tosa;

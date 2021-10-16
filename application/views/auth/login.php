@@ -43,7 +43,7 @@
                 </div>
                 <div class="clear"></div>
                 <div class="submit-agileits">
-                  <input type="submit" name="submit" value="login">
+                  <input type="submit" name="submit" value="Login">
                 </div>
               </form>
             </div>

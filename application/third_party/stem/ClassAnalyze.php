@@ -21,9 +21,9 @@ $db = new PDO('mysql:host='.$host.';port='.$port.';dbname='.$dbname.';charset=ut
 if(isset($_GET['persen']))
 {
 	$persen = $_GET['persen'];
-	$sql = $db->query("SELECT* FROM ( SELECT skripsi_komentar.*, @counter := @counter +1 AS counter FROM (select @counter:=0) AS initvar, skripsi_komentar ORDER BY `no` DESC ) AS X where counter <= (100/100 * @counter) ORDER BY `no` DESC");
+	$sql = $db->query("SELECT* FROM ( SELECT komentar.*, @counter := @counter +1 AS counter FROM (select @counter:=0) AS initvar, komentar ORDER BY `no` DESC ) AS X where counter <= (100/100 * @counter) ORDER BY `no` DESC");
 } else {
-	$sql = $db->query("SELECT * FROM skripsi_komentar");
+	$sql = $db->query("SELECT * FROM komentar");
 }		
 		$arr = array();
 		$no = 0;

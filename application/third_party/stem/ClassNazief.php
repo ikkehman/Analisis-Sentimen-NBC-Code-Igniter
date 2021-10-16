@@ -11,7 +11,7 @@ $dbuser = "root";
 $dbpass = "";
 $db = new PDO('mysql:host='.$host.';port='.$port.';dbname='.$dbname.';charset=utf8', $dbuser, $dbpass);
 
-		$sql = $db->query("SELECT katadasar FROM skripsi_katadasar");
+		$sql = $db->query("SELECT katadasar FROM katadasar");
 		$ar = array();
 		foreach($sql as $row){
 			$ar[] = $row['katadasar'];

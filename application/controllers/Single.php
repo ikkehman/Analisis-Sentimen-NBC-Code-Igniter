@@ -50,7 +50,7 @@ class Single extends MY_Controller {
     
     // Data untuk page events/add
         $data['single'] = $this->db->select('*')
-                  ->from('skripsi_komentar')
+                  ->from('komentar')
                   ->get();
     $data['pageTitle'] = 'Tambah Data single';
     $data['pageContent'] = $this->load->view('single/singleAdd', $data, TRUE);

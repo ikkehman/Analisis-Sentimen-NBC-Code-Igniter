@@ -1,7 +1,7 @@
 <?php
   class Model_kandas extends CI_Model {
 
-    public $table = 'skripsi_katadasar';
+    public $table = 'katadasar';
 
     public function get()
     {
@@ -72,7 +72,7 @@
 
     function get_all() {
       $this->datatables->select('id_ktdasar,katadasar');
-      $this->datatables->from('skripsi_katadasar');
+      $this->datatables->from('katadasar');
       $this->datatables->add_column('view', '<a href="kandas/edit/$1" class="edit_record btn btn-info" data-code="$1">Edit</a>  <a href="javascript:void(0);" class="delete_record btn btn-danger" data-toggle="modal" data-target="#modal-konfirmasi" data-code="$1">Delete</a>','id_ktdasar,katadasar');
       $this->datatables->add_column('cek', '<input type="checkbox" class="data-check" value="$1">','username');
       return $this->datatables->generate();

@@ -3,7 +3,7 @@ class Model_dashboard extends CI_Model{
 
     public function hitungtot()
 {   
-    $query = $this->db->get('skripsi_komentar');
+    $query = $this->db->get('komentar');
     if($query->num_rows()>0)
     {
       return $query->num_rows();
@@ -17,7 +17,7 @@ class Model_dashboard extends CI_Model{
 public function hitungpos()
 {   
     $query = $this->db->select('*')
-    ->from('skripsi_komentar')
+    ->from('komentar')
     ->where(array('sentimen' => 1))
     ->get();;
     if($query->num_rows()>0)
@@ -33,7 +33,7 @@ public function hitungpos()
 public function hitungneg()
 {   
     $query = $this->db->select('*')
-    ->from('skripsi_komentar')
+    ->from('komentar')
     ->where(array('sentimen' => 0))
     ->get();
     if($query->num_rows()>0)

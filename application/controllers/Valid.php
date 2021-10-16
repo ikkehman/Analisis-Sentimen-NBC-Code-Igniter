@@ -50,7 +50,7 @@ class Valid extends MY_Controller {
 
     // Data untuk page index
     $data['valid'] = $this->db->select('*')
-                          ->from('skripsi_analisa')
+                          ->from('analisa')
                           ->group_by('tgl')
                           ->get();
     $data['pageTitle'] = 'Data Pengujian';
@@ -66,7 +66,7 @@ class Valid extends MY_Controller {
     // Jika form di submit jalankan blok kode ini
     $analyze = new Analyze();
     $persent= 100-(intval($_GET['persen']));
-    $uji= $this->db->query("SELECT * FROM ( SELECT skripsi_komentar.*, @counter := @counter +1 AS counter FROM (select @counter:=0) AS initvar, skripsi_komentar ORDER BY `no` ASC ) AS X where counter <= ($persent/100 * @counter) ORDER BY `no` DESC");
+    $uji= $this->db->query("SELECT * FROM ( SELECT komentar.*, @counter := @counter +1 AS counter FROM (select @counter:=0) AS initvar, komentar ORDER BY `no` ASC ) AS X where counter <= ($persent/100 * @counter) ORDER BY `no` DESC");
     $r=0;
     $sets = intval($_GET['persen']);
     $tgl = date("Y-m-d H:i:s");
@@ -128,7 +128,7 @@ $lang[$r] = $res;
   public function result()
   {
     $sets = intval($_GET['persen']);
-    $last = $this->db->select('tgl')->where(array('sets' => $sets))->order_by('tgl',"desc")->limit(1)->get('skripsi_rekap')->row()->tgl;
+    $last = $this->db->select('tgl')->where(array('sets' => $sets))->order_by('tgl',"desc")->limit(1)->get('rekap')->row()->tgl;
     // Ambil data event dari database
     $valid = $this->model_valid->get_where(array('sets' => $sets,'tgl' => $last));
     // Mengubah format tanggal dari database
@@ -174,7 +174,7 @@ $lang[$r] = $res;
         //button
         $dataset = $_GET['dataset'];
         $lengkap = $this->db
-                          ->get_where('skripsi_analisa',array('sets'=>$dataset));
+                          ->get_where('analisa',array('sets'=>$dataset));
         foreach ($lengkap->result() as $k){
           $nucc = $k->sets;
         }
@@ -252,12 +252,12 @@ $lang[$r] = $res;
       $lengkap = array();
       $no = 0;
       $lengkap  = $this->db->select('*')
-                  ->get_where('skripsi_analisa',array('sets'=>$id_valid));
+                  ->get_where('analisa',array('sets'=>$id_valid));
       $total    = $this->db->select('COUNT(id) as total')
-                  ->from('skripsi_analisa')
+                  ->from('analisa')
                   ->where(array('sets' => $id_valid))
                   ->get();
-      $tosa     = $this->db->query("SELECT COUNT(id) AS total_salah FROM skripsi_analisa WHERE (truesentimen IS NOT NULL AND sentimen <> truesentimen AND `sets` = $id_valid)");
+      $tosa     = $this->db->query("SELECT COUNT(id) AS total_salah FROM analisa WHERE (truesentimen IS NOT NULL AND sentimen <> truesentimen AND `sets` = $id_valid)");
 $data['no'] = $no;
 $data['total_data'] = $total;
 $data['total_salah'] = $tosa;
