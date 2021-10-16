@@ -244,11 +244,6 @@ if ($nbc>$nbcn) {
 		$this->wx = $wx;
 	}
 
-	public function hitung_jarak(){
-
-
-	}		
-
 	public function single_process($kalimat, $debug=false){
 		//clear old variable
 		$this->input = $this->token = $this->use = $this->tf = $this->df = $this->bobot = null;
@@ -262,17 +257,9 @@ if ($nbc>$nbcn) {
 
 		$this->cari_tf();
 		$this->cari_df();
-		$this->hitung_jarak();
 
 		$this->hitung_bobot();
 
-		//$this->kmeans();
-	}
-
-		public function jarak_hasil_ke_pusat(){
-		$pusat = $this->pusat;
-		$bobot = $this->df[0];
-		return abs(6 - $bobot);
 	}
 
 }

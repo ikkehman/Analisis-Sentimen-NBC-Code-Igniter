@@ -41,47 +41,6 @@ function stem($string){
 		return $saved;
 }
 
-function show_alert(){
-	if(isset($_SESSION['adm-type'])){
-		$type = ucfirst($_SESSION['adm-type']);
-		unset($_SESSION['adm-type']);
-		$message = $_SESSION['adm-message'];
-		unset($_SESSION['adm-message']);
-
-		return 'alertify.alert("'.$type.'", "'.$message.'")';
-	}
-}
-
-function is_same($a, $b, $out=""){
-	if($a == $b){
-		echo $out;
-	}
-}
-
-function quote($txt){
-	global $db;
-	$qry = $db->quote($txt);
-	return $qry;
-}
-
-
-
-function get_setting($param){
-	$sql = query("SELECT * FROM skripsi_setting WHERE param = ".quote($param));
-	if($sql->rowCount() > 0){
-		//setting ketemu
-		$row = $sql->fetch();
-		return $row['value'];
-	}
-	return false;
-}
-
-function change_setting($param,$newvalue){
-	$sql = query("UPDATE skripsi_setting SET value = ".quote($newvalue)." WHERE param = ".quote($param));
-	return true;
-}
-
-
 function dump($arr, $hei = 300){
 	echo "<textarea style='width:100%; height:".$hei."px;'>";
 	var_dump($arr);
