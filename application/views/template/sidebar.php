@@ -58,6 +58,13 @@
             </li>
 
             <li class="nav-item">
+              <a href="<?php echo base_url('normalisasi'); ?>">
+                <i class="la la-search"></i>
+                <p>Normalisasi</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
               <a href="<?php echo base_url('latihan'); ?>">
                 <i class="la la-comments"></i>
                 <p>Data Latih</p>

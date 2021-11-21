@@ -35,7 +35,7 @@
                 </div>
                 <div class="card-body">
                     <button class="btn btn-danger" onclick="bulk_delete()"><i class="la la-trash-o"></i> Hapus Sekaligus</button>
-                    <a href="<?php echo base_url('kandas/add'); ?>" class="btn btn-primary btn-border" style="float: right;">+ Kata</a>
+                    <a href="<?php echo base_url('normalisasi/add'); ?>" class="btn btn-primary btn-border" style="float: right;">+ Kata</a>
                   
                   <div class="table-responsive">
                     <hr>
@@ -43,7 +43,8 @@
                       <thead>
                         <tr>
                           <th><input type="checkbox" id="check-all"></th>
-                          <th>Kata Dasar</th>
+                          <th>Kata Awal</th>
+                          <th>Kata Normal</th>
                           <th>Aksi</th>
                         </tr>
                       </thead>
@@ -70,13 +71,14 @@ $(document).ready(function() {
   "serverSide": true,
   "order": [], //Initial no order.
   "ajax": {
-                        "url": '<?php echo base_url()?>kandas/get_json',
+                        "url": '<?php echo base_url()?>normalisasi/get_json',
                         "type": "POST",
                                         "dataType": "JSON",
                         },
                         "columns": [
                         {"data": "cek"},
-                        {"data": "katadasar"},
+                        {"data": "upnormal"},
+                        {"data": "normal"},
                         {"data": "view"},                        
                     ],
                             //Set column definition initialisation properties.
@@ -131,8 +133,8 @@ function bulk_delete()
         {
             $.ajax({
                 type: "POST",
-                data: {id_ktdasar:list_id},
-                url: "<?php echo site_url('kandas/bulk_delete')?>",
+                data: {id_normal:list_id},
+                url: "<?php echo site_url('normalisasi/bulk_delete')?>",
                 success: function(data)
                 {
                     if(data.status)
@@ -172,7 +174,7 @@ function bulk_delete()
   var modal = $(this)
  
   // Mengisi atribut href pada tombol ya yang kita berikan id hapus-true pada modal .
-  modal.find('#hapus-true').attr("href","kandas/delete/"+id);
+  modal.find('#hapus-true').attr("href","normalisasi/delete/"+id);
  
  })
  

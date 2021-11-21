@@ -1,7 +1,7 @@
 <?php
-  class Model_kandas extends CI_Model {
+  class Model_normalisasi extends CI_Model {
 
-    public $table = 'katadasar';
+    public $table = 'normalisasi';
 
     public function get()
     {
@@ -12,7 +12,7 @@
       return $query;
     }
 
-    public function get_kandas($limit, $offset)
+    public function get_normalisasi($limit, $offset)
     {
       // Jalankan query
       $query = $this->db
@@ -42,39 +42,39 @@
       return $query;
     }
 
-    public function update($id_ktdasar, $data)
+    public function update($id_normal, $data)
     {
       // Jalankan query
       $query = $this->db
-        ->where('id_ktdasar', $id_kandas)
+        ->where('id_normal', $id_normal)
         ->update($this->table, $data);
       
       // Return hasil query
       return $query;
     }
 
-    public function delete($id_ktdasar)
+    public function delete($id_normal)
     {
       // Jalankan query
       $query = $this->db
-        ->where('id_ktdasar', $id_ktdasar)
+        ->where('id_normal', $id_normal)
         ->delete($this->table);
       
       // Return hasil query
       return $query;
     }
 
-    public function delete_by_id($id_ktdasar)
+    public function delete_by_id($id_normal)
     {
-        $this->db->where('id_ktdasar', $id_ktdasar)
+        $this->db->where('id_normal', $id_normal)
         ->delete($this->table);
     }
 
     function get_all() {
-      $this->datatables->select('id_ktdasar,katadasar');
-      $this->datatables->from('katadasar');
-      $this->datatables->add_column('view', '<a href="kandas/edit/$1" class="edit_record btn btn-info" data-code="$1">Edit</a>  <a href="javascript:void(0);" class="delete_record btn btn-danger" data-toggle="modal" data-target="#modal-konfirmasi" data-code="$1">Delete</a>','id_ktdasar,katadasar');
-      $this->datatables->add_column('cek', '<input type="checkbox" class="data-check" value="$1">','id_ktdasar');
+      $this->datatables->select('id_normal,normal,upnormal');
+      $this->datatables->from('normalisasi');
+      $this->datatables->add_column('view', '<a href="normalisasi/edit/$1" class="edit_record btn btn-info" data-code="$1">Edit</a>  <a href="javascript:void(0);" class="delete_record btn btn-danger" data-toggle="modal" data-target="#modal-konfirmasi" data-code="$1">Delete</a>','id_normal,normalisasi');
+      $this->datatables->add_column('cek', '<input type="checkbox" class="data-check" value="$1">','id_normal');
       return $this->datatables->generate();
   }
 
