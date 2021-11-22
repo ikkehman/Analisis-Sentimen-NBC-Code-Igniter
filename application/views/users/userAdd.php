@@ -64,7 +64,7 @@
                             <select name="level" required="" class="form-control">
                               <option disabled>-Pilih level-</option>
                               <option value="administrator">Administrator</option>
-                              <option value="kpukabkot">KPU Kabupaten/Kota</option>
+                              <option value="validator">Validator</option>
                             </select>
                           </div>
                     </div>

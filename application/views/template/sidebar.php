@@ -101,15 +101,9 @@
               <div class="subheader">Menu</div>
 
             <li class="nav-item">
-              <a href="<?php echo base_url('suara_partai'); ?>">
-                <i class="la la-warning"></i>
-                <p>Suara</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="<?php echo base_url('dokumentasi'); ?>">
-                <i class="la la-pencil"></i>
-                <p>Dokumentasi</p>
+              <a href="<?php echo base_url('latihan/multi'); ?>">
+                <i class="la la-comments"></i>
+                <p>Validasi</p>
               </a>
             </li>
             <hr/>

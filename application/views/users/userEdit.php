@@ -75,7 +75,7 @@
                               <option disabled>-Pilih level-</option>
                               <option  selected value="<?php echo $user->level; ?>"><?php echo ucwords ($user->level); ?></option>
                               <option value="administrator">Administrator</option>
-                              <option value="kpukabkot">KPU Kabupaten/Kota</option>
+                              <option value="validator">Validator</option>
                             </select>
                           </div>
                     </div>

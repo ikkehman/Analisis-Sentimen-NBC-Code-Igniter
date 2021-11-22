@@ -68,7 +68,7 @@ class Latihan extends MY_Controller {
     }
     // Data untuk page events/add
         $data['latihan'] = $this->db->select('*')
-                  ->from('skripsi_komentar')
+                  ->from('komentar')
                   ->get();            
     $data['pageTitle'] = 'Tambah Data latihan';
     $data['pageContent'] = $this->load->view('latihan/latihanAdd', $data, TRUE);
@@ -228,7 +228,7 @@ class Latihan extends MY_Controller {
         //endgame
       }
         $data['latihan'] = $this->db->select('*')
-                  ->from('skripsi_komentar')
+                  ->from('komentar')
                   ->where(array('sentimen' => 3))
                   ->get();
         $data['r'] = $r;

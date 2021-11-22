@@ -7,9 +7,8 @@
     public function cekAkun($username, $password)
     {
       // Get data user yang mempunyai username == $username dan active == 2
-			//$this->db
-      //     ->join('regencies','regencies.id_regen=users.wilayah')
-       //    ->where('username', $username);
+			$this->db
+           ->where('username', $username);
 			//$this->db->where('active', '1');
 			
       // Jalankan query
