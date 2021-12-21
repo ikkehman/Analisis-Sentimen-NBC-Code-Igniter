@@ -19,7 +19,6 @@ class Latihan extends MY_Controller {
     
     // Cek apakah user login 
     // sebagai administrator
-    $this->isKepalaSuku();
 
     // Load model events
     $this->load->model('model_latihan');
@@ -28,6 +27,7 @@ class Latihan extends MY_Controller {
 
   public function index()
   {
+    $this->isKepalaSuku();
     // Data untuk page index
     $data['pageTitle'] = 'Data latihan';
     $data['pageContent'] = $this->load->view('latihan/latihanList', $data, TRUE);

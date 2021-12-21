@@ -5,7 +5,7 @@
                     </div>
       <div class="card-content">
       <div class="card-body">
-
+	  <?php if($this->session->userdata('level') == 'administrator'): ?>
         <div class="alert btn-secondary">
 			      Masukkan data set kalimat uji yang ingin dianalisa dalam format Excel untuk diolah secara langsung.
             <br>
@@ -19,7 +19,7 @@
               <button name="btn" class="btn btn-primary pmd-ripple-effect">Process</button>
               </div>
         </form>
-
+		<?php endif; ?>
       </div>
 
 	  <?php if($r > 0): ?>
